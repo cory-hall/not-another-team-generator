@@ -1,0 +1,25 @@
+{
+  "name": "not-another-team-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cory-hall/not-another-team-generator.git"
+  },
+  "author": "Cory Hall",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cory-hall/not-another-team-generator/issues"
+  },
+  "homepage": "https://github.com/cory-hall/not-another-team-generator#readme",
+  "dependencies": {
+    "inquirer": "^8.2.2"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}
