@@ -1,27 +1,13 @@
 const inquirer = require('inquirer');
-const addManager = require('./lib/Manager');
-const addEngineer = require('./lib/Engineer');
-const addIntern = require('./lib/Intern');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
 
-const managerQuestions = [
-   "What is your name?",
-   "What is your employee ID number?",
-   "What is your e-mail address?",
-   "What is your office number?"
-];
-
-const engineerQuestions = [
-   "What is the engineer's name?",
-   "What is the engineer's employee ID number?",
-   "What is the engineer's e-mail address?",
-   "What is the engineer's GitHub username?"
-];
-
-const internQuestions = [
-   "What is the intern's name?",
-   "What is the intern's employee ID number?",
-   "What is the intern's e-mail address?",
-   "Where do you go to school?"
+const questions = [
+   "What is the employee's name?",
+   "What is the employee's ID number?",
+   "What is the employee's e-mail address?",
+   "What is this employee's role at the company?"
 ];
 
 function writeFile() {
@@ -29,73 +15,71 @@ function writeFile() {
 }
 
 function init() {
-   var status = "manager";
-
-   let answer =  inquirer.prompt([
+   let userInput1 = inquirer.prompt([
       {
          type: 'input',
          name: 'name',
-         message: managerQuestions[0],
+         message: questions[0],
          validate: nameInput => {
             if (nameInput) {
                return true;
             } else {
-               console.log("Please enter your name.");
+               console.log("Please enter employee's name.");
             }
          }
       },
       {
          type: 'input',
          name: 'empId',
-         message: managerQuestions[1],
+         message: questions[1],
          validate: idInput => {
             if (idInput) {
                return true;
             } else {
-               console.log("Please enter an employee ID number.")
+               console.log("Please enter employee's ID number.")
             }
          }
       },
       {
          type: 'input',
          name: 'email',
-         message: managerQuestions[2],
+         message: questions[2],
          validate: emailInput => {
             if (emailInput) {
                return true;
             } else {
-               console.log("Please enter an e-mail address.");
-            }
-         }
-      },
-      {
-         type: 'input',
-         name: 'office',
-         message: managerQuestions[3],
-         validate: officeInput => {
-            if (officeInput) {
-               return true;
-            } else {
-               console.log("Please enter an office number.");
+               console.log("Please enter employee's e-mail address.");
             }
          }
       },
       {
          type: 'list',
-         name: 'add',
-         message: "Would you like to add another employee?",
-         choices: ['Add an engineer', "Add an intern", "No, I'm all done!"]
+         name: 'role',
+         message: questions[3],
+         choices: ['Manager', "Engineer", "Intern"]
       }
-   ])
-   .then(employeeData => {
-      if (employeeData.add === "No, I'm all done!") {
-         return addManager(employeeData);
-      }
-      else if (employeeData.add === "Add an engineer") {
-         return addEngineer(employeeData);
-      } else {
-      }
-   })
+   ]);
+
+   let userInput2;
+
+   if (userInput1.role === 'Manager') {
+      userInput2 = inquirer.prompt ([
+         {
+            type: 'input',
+            name: 'var',
+            message: "What is the manager's office number?",
+            validate: varInput => {
+               if (varInput) {
+                  return true;
+               } else {
+                  console.log("Please enter an office number.");
+               }
+            }
+         }
+      ])
+
+      const manager = new Manager(userInput1.name, userInput1.empId, userInput1.email, userInput2.var)
+   }
 }
 
 init();
