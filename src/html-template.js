@@ -1,4 +1,4 @@
-const generateHTML = arr => {
+const generateHTML = cards => {
    return `
    <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +20,7 @@ const generateHTML = arr => {
 </div>
 <div class="container-body container-fluid">
    <div class="row">
+   ${cards}
     </div>
 </div>
 <script src="https://kit.fontawesome.com/257de25400.js" crossorigin="anonymous"></script>  
@@ -28,4 +29,22 @@ const generateHTML = arr => {
    `
 }
 
-module.exports = generateHTML;
+const generateCards = arr => {
+   let roleIcon;
+   let roleInfo;
+
+   if (arr.role === "Manager") {
+      roleIcon = `<i class="fas fa-mug-hot"></i>`;
+      roleInfo = `Office Number: ${arr.officeNum}`;
+   }
+   else if (arr.role === "Engineer") {
+      roleIcon = `<i class="fas fa-glasses"></i>`;
+      roleInfo = `GitHub Username: <a href="https://github.com/${arr.github}" target="_blank">${arr.github}</a>`;
+   }
+   else if (arr.role === "Intern") {
+      roleIcon = `<i class="fas fa-user-graduate"></i>`;
+      roleInfo = `School: ${arr.school}`;
+   }
+}
+
+module.exports = { generateHTML, generateCards };

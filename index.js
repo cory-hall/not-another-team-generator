@@ -3,7 +3,7 @@ const fs = require('fs');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-const generateHtml = require('./src/html-template');
+const { generateHTML, generateCards } = require('./src/html-template');
 
 const questions = [
    "What is the employee's name?",
@@ -15,7 +15,7 @@ const questions = [
 let teamArr = [];
 
 const writeFile = () => {
-   let newFile = generateHtml();
+   let newFile = generateHTML(teamArr);
    fs.writeFile('./dist/index.html', newFile, err => {
       if (err) {
          console.log("Error creating file!");
@@ -170,4 +170,6 @@ const confirmAddMore = () => {
 
 
 initialPrompt()
-   .then(writeFile)
+   .then(employeeData => {
+      generateCards(employeeData);
+   })
