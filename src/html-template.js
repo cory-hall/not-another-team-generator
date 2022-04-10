@@ -9,12 +9,13 @@ const generateHTML = cards => {
 <title>Team Profile</title>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../src/style.css">
 <style>
 </style>
 </head>
 <body>
 <div class="header">
-<div class="jumbotron bg-info">
+<div class="jumbotron bg-danger">
    <h1 class="display-4 text-white text-center">My Not So Average Team</h1>
 </div>
 </div>
@@ -27,7 +28,7 @@ const generateHTML = cards => {
 </body>
 </html>
    `
-}
+};
 
 const generateCards = arr => {
    let roleIcon;
@@ -45,6 +46,24 @@ const generateCards = arr => {
       roleIcon = `<i class="fas fa-user-graduate"></i>`;
       roleInfo = `School: ${arr.school}`;
    }
-}
+
+   return `
+   <div class="col-sm-4 col-6">
+      <div class="card mb-5 bg-white">
+         <div class="card-header bg-primary">
+            <h4 class="text-white">${arr.name}</h4>
+            <h4 class="text-white">${roleIcon}</i> ${arr.role}</h4>
+         </div>
+         <div class="card-body bg">
+            <ul class="list-unstyled">
+               <li>ID Number: ${arr.idNum}</li>
+               <li>E-mail: <a href="mailto:${arr.email}">${arr.email}</a></li>
+               <li>${roleInfo}</li>
+            </ul>
+         </div>
+      </div>
+   </div>
+   `
+};
 
 module.exports = { generateHTML, generateCards };

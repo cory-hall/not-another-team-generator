@@ -1,0 +1,19 @@
+.card-body {
+   background-color: lightgray;
+}
+
+ul {
+   align-items: center;
+   justify-content: center;
+   margin: auto;
+}
+
+li {
+   background-color: white;
+   padding: 5px;
+   border: 1px solid lightgray;
+}
+
+.row {
+   margin: 100px;
+}

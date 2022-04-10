@@ -5,6 +5,9 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const { generateHTML, generateCards } = require('./src/html-template');
 
+let teamArr = [];
+let cardString = ``;
+
 const questions = [
    "What is the employee's name?",
    "What is the employee's ID number?",
@@ -12,18 +15,25 @@ const questions = [
    "What is the employee's role at the company?"
 ];
 
-let teamArr = [];
+
 
 const writeFile = () => {
-   let newFile = generateHTML(teamArr);
-   fs.writeFile('./dist/index.html', newFile, err => {
+   for (let i = 0; i < teamArr.length; i++) {
+      cardString = cardString + generateCards(teamArr[i]);
+   }
+
+   let finalFile = generateHTML(cardString);
+
+   fs.writeFile('./dist/index.html', finalFile, err => {
       if (err) {
-         console.log("Error creating file!");
+         console.clear();
+         console.log("There was an error generating your file.");
       } else {
-         console.log("File created successfully!");
+         console.clear();
+         console.log("File successfully created");
       }
-   })
-}
+   }) 
+   }
 
 const initialPrompt = () => {
    return inquirer.prompt([
@@ -162,14 +172,11 @@ const confirmAddMore = () => {
          if (answer.confirmAddMore) {
             initialPrompt();
          } else {
-            return console.log(teamArr);
+            writeFile();
          }
       })
 }
 
 
 
-initialPrompt()
-   .then(employeeData => {
-      generateCards(employeeData);
-   })
+initialPrompt();
