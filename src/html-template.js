@@ -1,3 +1,4 @@
+// base html generation
 const generateHTML = cards => {
    return `
    <!DOCTYPE html>
@@ -30,23 +31,31 @@ const generateHTML = cards => {
    `
 };
 
+// card generation
 const generateCards = arr => {
    let roleIcon;
    let roleInfo;
 
+   // if employee role is manager
+   // add manager icon and office number
    if (arr.role === "Manager") {
       roleIcon = `<i class="fas fa-mug-hot"></i>`;
       roleInfo = `Office Number: ${arr.officeNum}`;
    }
+   // if employee role is engineer
+   // add engineer icon and github link
    else if (arr.role === "Engineer") {
       roleIcon = `<i class="fas fa-glasses"></i>`;
       roleInfo = `GitHub Username: <a href="https://github.com/${arr.github}" target="_blank">${arr.github}</a>`;
    }
+   // if employee role is intern
+   // add intern icon and school
    else if (arr.role === "Intern") {
       roleIcon = `<i class="fas fa-user-graduate"></i>`;
       roleInfo = `School: ${arr.school}`;
    }
 
+   // the markup to add to the HTML generation
    return `
    <div class="col-sm-4 col-6">
       <div class="card mb-5 bg-white">
