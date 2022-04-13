@@ -13,6 +13,9 @@
   - [License](#license)
 
   ## Installation
+  View video for instructions<br>
+  https://drive.google.com/file/d/1VUP_IARNTig1Z63TrW59-1taZfIxVREE/view<br>
+  OR<br>
   Clone, fork, or download the zip from the repo.
 
   ## Usage
